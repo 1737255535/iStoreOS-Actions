@@ -28,6 +28,8 @@ on:
         description: '4、请输入默认网关（选择static时必填）'
         required: true
         default: '192.168.5.1'
+  schedule:
+    - cron: 0 2 * * *
 
 env:
   VERSION: 24.10.6
