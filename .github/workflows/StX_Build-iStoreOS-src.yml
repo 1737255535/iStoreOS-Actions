@@ -223,6 +223,8 @@ on:
         required: false
         default: true
         type: boolean
+  schedule:
+    - cron: 0 7 * * *
 
 env:
   VERSION: 24.10.6
