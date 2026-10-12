@@ -73,7 +73,13 @@ jobs:
 
     - name: ⏬ 下载 ImageBuilder
       run: |
-        curl -L -o imagebuilder.tar.zst https://github.com/Kwonelee/iStoreOS-Actions/releases/download/iStoreOS-ImageBuilder/${{ inputs.build_version }}-istoreos-imagebuilder-armsr-armv8.Linux-x86_64.tar.zst
+        # 定时触发时 inputs.build_version 为空，回退到默认 20260417
+        BUILD_VERSION="${{ inputs.build_version }}"
+        if [ -z "$BUILD_VERSION" ]; then BUILD_VERSION="20260417"; fi
+        echo "使用 build_version: $BUILD_VERSION"
+        curl -L -o imagebuilder.tar.zst https://github.com/Kwonelee/iStoreOS-Actions/releases/download/iStoreOS-ImageBuilder/${BUILD_VERSION}-istoreos-imagebuilder-armsr-armv8.Linux-x86_64.tar.zst
+        # 校验下载成功（防止 404 小文件被解压导致后续失败）
+        [ "$(stat -c%s imagebuilder.tar.zst)" -gt 1000000 ] || { echo "❌ imagebuilder 下载异常: $(stat -c%s imagebuilder.tar.zst) 字节"; head -c 300 imagebuilder.tar.zst; exit 1; }
         tar --use-compress-program=unzstd -xvf imagebuilder.tar.zst
         mv istoreos-imagebuilder-* imagebuilder
 
