@@ -1051,6 +1051,7 @@ PACKAGES="$PACKAGES lucky luci-app-lucky luci-i18n-lucky-zh-cn"
 PACKAGES="$PACKAGES luci-app-adguardhome luci-i18n-adguardhome-zh-cn"
 #PACKAGES="$PACKAGES openlist2 luci-app-openlist2 luci-i18n-openlist2-zh-cn"
 PACKAGES="$PACKAGES filebrowser luci-app-filebrowser-go luci-i18n-filebrowser-go-zh-cn"
+PACKAGES="$PACKAGES ruby ruby-yaml"
 PACKAGES="$PACKAGES luci-app-openclash"
 
 # 追加自定义包
